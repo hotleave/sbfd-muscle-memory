@@ -1,13 +1,13 @@
 @font-face {
-    font-family: 'fontello';
-    src: url('../font/fontello.eot?99696836');
-    src: url('../font/fontello.eot?99696836#iefix') format('embedded-opentype'),
-         url('../font/fontello.woff2?99696836') format('woff2'),
-         url('../font/fontello.woff?99696836') format('woff'),
-         url('../font/fontello.ttf?99696836') format('truetype'),
-         url('../font/fontello.svg?99696836#fontello') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'fontello';
+  src: url('../font/fontello.eot?99696836');
+  src: url('../font/fontello.eot?99696836#iefix') format('embedded-opentype'),
+    url('../font/fontello.woff2?99696836') format('woff2'),
+    url('../font/fontello.woff?99696836') format('woff'),
+    url('../font/fontello.ttf?99696836') format('truetype'),
+    url('../font/fontello.svg?99696836#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
@@ -20,191 +20,272 @@
   }
 }
 */
-.icon, .icon:before {
-    font-family: "fontello";
-    font-style: normal;
-    font-weight: normal;
-}
+.icon,
 .icon:before {
-    display: inline-block;
-    text-decoration: inherit;
-    width: 1em;
-    margin-right: .2em;
-    text-align: center;
-    /* opacity: .8; */
-
-    /* For safety - reset parent styles, that can break glyph codes*/
-    font-variant: normal;
-    text-transform: none;
-
-    /* fix buttons height, for twitter bootstrap */
-    line-height: 1em;
-
-    /* Animation center compensation - margins should be symmetric */
-    /* remove if not needed */
-    margin-left: .2em;
-
-    /* you can be more comfortable with increased icons size */
-    /* font-size: 120%; */
-
-    /* Font smoothing. That was taken from TWBS */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
-    /* Uncomment for 3D effect */
-    /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
 }
 
-.icon-niu-top:before { content: '\e800'; } /* '' */
-.icon-help-circled:before { content: '\e801'; } /* '' */
-.icon-cog:before { content: '\e802'; } /* '' */
-.icon-sun:before { content: '\e803'; } /* '' */
-.icon-moon:before { content: '\e804'; } /* '' */
-.icon-theme:before { content: var(--theme-icon-text); }
-.icon-arrows-cw:before { content: '\e805'; } /* '' */
-.icon-eye-off:before { content: '\e806'; } /* '' */
-.icon-keyboard:before { content: '\e807'; } /* '' */
-.icon-floppy:before { content: '\e808'; } /* '' */
-.icon-info:before { content: '\e809'; } /* '' */
-.icon-hourglass-2:before { content: '\e810'; } /* '' */
+.icon:before {
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+.icon-niu-top:before {
+  content: '\e800';
+}
+
+.icon-help-circled:before {
+  content: '\e801';
+}
+
+.icon-cog:before {
+  content: '\e802';
+}
+
+.icon-sun:before {
+  content: '\e803';
+}
+
+.icon-moon:before {
+  content: '\e804';
+}
+
+.icon-theme:before {
+  content: var(--theme-icon-text);
+}
+
+.icon-arrows-cw:before {
+  content: '\e805';
+}
+
+.icon-eye-off:before {
+  content: '\e806';
+}
+
+.icon-keyboard:before {
+  content: '\e807';
+}
+
+.icon-floppy:before {
+  content: '\e808';
+}
+
+.icon-info:before {
+  content: '\e809';
+}
+
+.icon-hourglass-2:before {
+  content: '\e810';
+}
 
 :root {
-    --show-hint: none;
-    --theme-icon-text: '\e804';
-    --base-background: #141414;
-    --base-fill: #303030;
-    --dark-fill: #39393A;
-    --brand-color: #409EFF;
-    --ragular-text: #CFD3DC;
-    --primary-text: #E5EAF3;
-    --secondary-text: #A3A6AD;
-    --info-color: #909399;
-    --base-border: #4C4D4F;
+  --show-hint: none;
+  --theme-icon-text: '\e804';
+  --base-background: #141414;
+  --base-fill: #303030;
+  --dark-fill: #39393A;
+  --brand-color: #409EFF;
+  --ragular-text: #CFD3DC;
+  --primary-text: #E5EAF3;
+  --secondary-text: #A3A6AD;
+  --info-color: #909399;
+  --base-border: #4C4D4F;
 
 }
 
 html,
 body {
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--base-background);
-    font-family: Inter, Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, \5fae\8f6f\96c5\9ed1, Arial, sans-serif;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--base-background);
+  font-family: Inter, Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, \5fae\8f6f\96c5\9ed1, Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
 }
 
 html.light {
-    --theme-icon-text: '\e803';
-    --base-background: #FFFFFF;
-    --base-fill: #F0F2F5;
-    --dark-fill: #EBEDF0;
-    --brand-color: #409EFF;
-    --ragular-text: #606266;
-    --primary-text: #303133;
-    --secondary-text: #909399;
-    --info-color: #909399;
-    --base-border: #DCDFE6;
+  --theme-icon-text: '\e803';
+  --base-background: #FFFFFF;
+  --base-fill: #F0F2F5;
+  --dark-fill: #EBEDF0;
+  --brand-color: #409EFF;
+  --ragular-text: #606266;
+  --primary-text: #303133;
+  --secondary-text: #909399;
+  --info-color: #909399;
+  --base-border: #DCDFE6;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  overflow: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+footer {
+  width: 100vw;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 a {
-    color: var(--ragular-text);
-    text-decoration: none;
+  color: var(--ragular-text);
+  text-decoration: none;
 }
 
 a:hover {
-    color: var(--brand-color);
-    text-decoration: underline dotted;
+  color: var(--brand-color);
+  text-decoration: underline dotted;
 }
 
 .card {
-    width: 24rem;
-    height: 32rem;
-    display: flex;
-    background-color: var(--base-fill);
-    text-align: center;
-    align-items: center;
-    border: 1px solid var(--base-border);
-    border-radius: 4px;
-    position: relative;
+  width: 21rem;
+  height: 28rem;
+  display: none;
+  background-color: var(--base-fill);
+  border: 1px solid var(--base-border);
+  border-radius: 4px;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+}
+.card.visiable {
+  display: flex;
 }
 
 .card .card-front {
-    font-size: 20rem;
-    color: var(--primary-text);
-    display: inline-block;
-    margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  font-size: 20rem;
+  color: var(--primary-text);
+  position: relative;
 }
 
 .card .card-back {
-    font-size: 3rem;
-    color: var(--brand-color);
-    position: absolute;
-    bottom: 0;
-    right: .5rem;
-    display: var(--show-hint);
+  font-size: 3rem;
+  color: var(--brand-color);
+  display: var(--show-hint);
+  position: absolute;
+  bottom: .5rem;
+  right: .5rem;
 }
 
 .card .icon {
-    font-size: 24rem;
+  font-size: 24rem;
 }
 
 .card-front .info {
-    font-size: 1.2rem;
-    color: var(--info-color);
-    line-height: 32rem;
+  font-size: 1.2rem;
+  color: var(--info-color);
+  height: 100%;
+  vertical-align: middle;
+}
+
+.card input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  position: absolute;
+  border: none;
+  caret-color: transparent;
+}
+
+.card input:active,
+.card input:focus {
+  border: none;
+  outline: none;
 }
 
 #menu {
-    position: absolute;
-    right: .6rem;
-    top: 50%;
-    margin-top: -10rem;
-    width: 2.4rem;
-    border: 1px solid var(--base-border);
-    border-radius: 1.2rem;
-    color: var(--secondary-text);
-    font-size: 1.2rem;
-    line-height: 2.5rem;
-    text-align: center;
-    cursor: pointer;
+  /* position: absolute; */
+  /* top: .6rem; */
+  height: 2.5rem;
+  border: 1px solid var(--base-border);
+  border-radius: 4px;
+  color: var(--primary-text);
+  font-size: 1.2rem;
+  line-height: 2.5rem;
+  text-align: center;
+  cursor: pointer;
+  padding: .25rem 1rem;
+  z-index: 99999;
+  background-color: var(--base-background);
 }
 
 #menu .icon:hover {
-    font-size: 1.5rem;
-    color: var(--secondary-text);
+  color: var(--brand-color);
 }
 
 .content {
-    width: 60%;
-    color: var(--secondary-text);
-    margin-left: 1.5rem;
-    display: none;
-}
-
-.content h3 {
-    color: var(--brand-color);
+  padding: 1.5rem;
+  color: var(--secondary-text);
+  display: none;
 }
 
 .content.visiable {
-    display: inline-block;
+  display: block;
+}
+
+.content h3 {
+  color: var(--brand-color);
+}
+
+.content .form-item {
+  line-height: 2rem;
 }
 
 .content ul li {
-    line-height: 1.5rem;
+  line-height: 1.5rem;
 }
 
 .content em {
-    font-weight: bold;
-    font-style: normal;
-    color: var(--ragular-text);
+  font-weight: bold;
+  font-style: normal;
+  color: var(--ragular-text);
 }
 
 .content kbd {
-    background-color: var(--dark-fill);
-    padding: .2rem .5rem;
-    border-radius: 3px;
+  background-color: var(--dark-fill);
+  padding: .2rem .5rem;
+  border-radius: 3px;
+}
+
+.content hr {
+  border: 1px dashed var(--base-border);
 }

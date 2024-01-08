@@ -3,100 +3,111 @@
 
 <head>
   <title>声笔飞单部首肌肉记忆训练</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/main.css" />
-  <script src="scripts/sm.js"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
   <link rel="icon" type="image/ico" href="/favicon.ico" />
   <link rel="manifest" href="/site.webmanifest" />
+  <script src="scripts/sm.js"></script>
 </head>
 
 <body>
-  <div id="menu">
-    <i id="restart" class="icon icon-arrows-cw" title="重新开始(F9)"></i>
-    <i id="save" class="icon icon-floppy" title="保存进度(10)"></i>
-    <i id="load" class="icon icon-hourglass-2" title="加载进度(F8)"></i>
-    <i id="discard" class="icon icon-eye-off" title="不再显示该卡片(Delete/Backspace)"></i>
-    <i id="theme" class="icon icon-theme" title="切换主题颜色(F3)"></i>
-    <i id="setup" class="icon icon-cog" title="设置(F2)"></i>
-    <i id="shortcut" class="icon icon-keyboard" title="快捷键(?)"></i>
-    <i id="about" class="icon icon-info" title="关于(F1)"></i>
-  </div>
-  <div class="card">
-    <span class="card-front"><span class="info">按下空格键开始</span></span>
-    <!-- <span class="card-front"><i class="icon">&#xe800;</i></span> -->
-    <span class="card-back"></span>
-  </div>
-  <div id="shortcut-content" class="content">
-    <h3>按键说明：</h3>
-    <ul>
-      <li><kbd>F1</kbd>: 关于</li>
-      <li><kbd>F2</kbd>: 设置</li>
-      <li><kbd>F3</kbd>: 快速切换主题颜色</li>
-      <li><kbd>F8</kbd>: 加载进度，从浏览器本地存储中加载之前保存的进度，该操作会导致当前进度丢失。在进入训练页面时会自动尝试加载进度。</li>
-      <li><kbd>F9</kbd>: 重新开始，将部首乱序后放到训练队列，如果已经开始训练，则会覆盖之前的训练</li>
-      <li><kbd>F10</kbd>: 保存进度，将当前进度保存到浏览器本地存储，以便下次继续进行。在离开训练页面时会自动保存进度。</li>
-      <li><kbd>Delete</kbd>/<kbd>Backspace</kbd>/<kbd>Esc</kbd>: 从训练队列中移除该卡片，在重新开始前不会再遇到这个部首</li>
-      <li><kbd>Space</kbd>: 开始训练，在自动加载进度后并不会直接开始，需要按空格键手动开始，目的是防止第一个卡牌的记忆评级更准确</li>
-      <li><kbd>?</kbd>: 查看快捷键列表</li>
-    </ul>
-  </div>
-  <div id="setup-content" class="content">
-    <div class="form-item" id="theme-group">
-      <label for="dark-mode">深色主题</label>
-      <input id="dark-mode" type="radio" name="theme-mode" value="dark">
-      <label for="light-mode">浅色主题</label>
-      <input id="light-mode" type="radio" name="theme-mode" value="light">
-      <label for="system-mode">跟随系统</label>
-      <input id="system-mode" type="radio" name="theme-mode" value="system" checked>
+  <main>
+    <div class="card visiable">
+      <span class="card-front"><span class="info">按下空格键开始</span></span>
+      <span class="card-back"></span>
+      <input type="text" />
     </div>
+      <!-- <span class="card-front"><i class="icon">&#xe800;</i></span> -->
+    <div id="shortcut-content" class="content">
+      <h3>按键说明：</h3>
+      <ul>
+        <li><kbd>F1</kbd>: 关于</li>
+        <li><kbd>F2</kbd>: 设置</li>
+        <li><kbd>F3</kbd>: 快速切换主题颜色</li>
+        <li><kbd>F8</kbd>: 加载进度，从浏览器本地存储中加载之前保存的进度，该操作会导致当前进度丢失。在进入训练页面时会自动尝试加载进度。</li>
+        <li><kbd>F9</kbd>: 重新开始，将部首乱序后放到训练队列，如果已经开始训练，则会覆盖之前的训练</li>
+        <li><kbd>F10</kbd>: 保存进度，将当前进度保存到浏览器本地存储，以便下次继续进行。在离开训练页面时会自动保存进度。</li>
+        <li><kbd>Delete</kbd>/<kbd>Backspace</kbd>/<kbd>Esc</kbd>: 从训练队列中移除该卡片，在重新开始前不会再遇到这个部首</li>
+        <li><kbd>Space</kbd>: 开始训练，在自动加载进度后并不会直接开始，需要按空格键手动开始，目的是防止第一个卡牌的记忆评级更准确</li>
+        <li><kbd>?</kbd>: 查看快捷键列表</li>
+      </ul>
+    </div>
+    <div id="setup-content" class="content">
+      <div class="form-item">
+        <label for="dark-mode">深色主题</label>
+        <input id="dark-mode" type="radio" name="theme-mode" value="dark">
+      </div>
+      <div class="form-item">
+        <label for="light-mode">浅色主题</label>
+        <input id="light-mode" type="radio" name="theme-mode" value="light">
+      </div>
+      <div class="form-item">
+        <label for="system-mode">跟随系统</label>
+        <input id="system-mode" type="radio" name="theme-mode" value="system" checked>
+      </div>
 
-    <div class="form-item">
-      <label for="show-hint">显示按键提示</label>
-      <input type="checkbox" id="show-hint" />
+      <hr />
+      <div class="form-item">
+        <label for="show-hint">按键提示</label>
+        <input type="checkbox" id="show-hint" />
+      </div>
     </div>
-  </div>
-  <div id="about-content" class="content">
-    <h2>
-      声笔飞系部首键位记忆练习(1.0.0)
-    </h2>
-    <h3>快速入门：</h3>
-    <p>
-    <ul>
-      <li>按空格开始训练</li>
-      <li>看到卡牌中显示的部首后，按下对应的按键</li>
-      <li>持续进行训练，直到达到满意的速度</li>
-    </ul>
-    </p>
-    <h3>使用说明：</h3>
-    <p>
-      程序集成了著名的 <a target="_blank" href="https://supermemo.guru/wiki/SuperMemo">SuperMemo</a>
-      记忆算法，能够有效的帮助用户快速且牢固的记忆声笔飞系的部首所在按键。
-    </p>
-    <p>
-      在（重新）开始训练时程序会将一个个的部首和对应的按键制作成一张张的卡牌，顺序是随机的。卡牌的正面是部首，背面是你需要输入的对应按键。在卡牌显示后，你要以最快的速度按下键盘上相应的按键。如果按键正确，则会自动显示下一张卡牌，且程序会根据你的响应时间来为你的记忆评级。
-    <ul>
-      <li>如果在 200ms 以内（5击以上），则认为是非常好的成绩，即 5 级</li>
-      <li>如果在 300ms 以内，则认为是不错的成绩，即 4 级</li>
-      <li>3 级 500ms 内</li>
-      <li>2 级 1s 内</li>
-      <li>超过 1s 只要输入正确，就是 1 级</li>
-      <li>输入错误为 0 级</li>
-    </ul>
+    <div id="about-content" class="content">
+      <h2>
+        声笔飞系部首键位记忆练习(1.0.0)
+      </h2>
+      <h3>快速入门：</h3>
+      <p>
+      <ul>
+        <li>按空格开始训练</li>
+        <li>看到卡牌中显示的部首后，按下对应的按键</li>
+        <li>持续进行训练，直到达到满意的速度</li>
+      </ul>
+      </p>
+      <h3>使用说明：</h3>
+      <p>
+        程序集成了著名的 <a target="_blank" href="https://supermemo.guru/wiki/SuperMemo">SuperMemo</a>
+        记忆算法，能够有效的帮助用户快速且牢固的记忆声笔飞系的部首所在按键。
+      </p>
+      <p>
+        在（重新）开始训练时程序会将一个个的部首和对应的按键制作成一张张的卡牌，顺序是随机的。卡牌的正面是部首，背面是你需要输入的对应按键。在卡牌显示后，你要以最快的速度按下键盘上相应的按键。如果按键正确，则会自动显示下一张卡牌，且程序会根据你的响应时间来为你的记忆评级。
+      <ul>
+        <li>如果在 200ms 以内（5击以上），则认为是非常好的成绩，即 5 级</li>
+        <li>如果在 300ms 以内，则认为是不错的成绩，即 4 级</li>
+        <li>3 级 500ms 内</li>
+        <li>2 级 1s 内</li>
+        <li>超过 1s 只要输入正确，就是 1 级</li>
+        <li>输入错误为 0 级</li>
+      </ul>
       程序会根据这个评级来安排该卡牌下次出现的时间，以便巩固你的记忆。
-    </p>
-    <p>
-      程序会在退出（关闭页面、刷新页面、关闭浏览器等）时自动将当前进度记录到浏览器的本地存储当中，当下载再次打开时，会自动尝试从本地存储中加载进度。<em>这个存储是存储在本地的，所以换了浏览器之后就需要重来了</em>
-    </p>
+      </p>
+      <p>
+        程序会在退出（关闭页面、刷新页面、关闭浏览器等）时自动将当前进度记录到浏览器的本地存储当中，当下载再次打开时，会自动尝试从本地存储中加载进度。<em>这个存储是存储在本地的，所以换了浏览器之后就需要重来了</em>
+      </p>
 
-    <h3>依赖项目：</h3>
-    <ul>
-      <li><a href="https://github.com/slaypni/SM-15" target="_blank">SM-15</a></li>
-      <li><a href="https://element-plus.gitee.io/" target="_blank">ElementPlus</a></li>
-      <li><a href="https://fontello.com/" target="_blank">Fontello</a></li>
-    </ul>
-  </div>
+      <h3>依赖项目：</h3>
+      <ul>
+        <li><a href="https://github.com/slaypni/SM-15" target="_blank">SM-15</a></li>
+        <li><a href="https://element-plus.gitee.io/" target="_blank">ElementPlus</a></li>
+        <li><a href="https://fontello.com/" target="_blank">Fontello</a></li>
+      </ul>
+    </div>
+  </main>
+  <footer>
+    <div id="menu">
+      <i id="restart" class="icon icon-arrows-cw" title="重新开始(F9)"></i>
+      <i id="save" class="icon icon-floppy" title="保存进度(10)"></i>
+      <i id="load" class="icon icon-hourglass-2" title="加载进度(F8)"></i>
+      <i id="discard" class="icon icon-eye-off" title="不再显示该卡片(Delete/Backspace)"></i>
+      <i id="theme" class="icon icon-theme" title="切换主题颜色(F3)"></i>
+      <i id="setup" class="icon icon-cog" title="设置(F2)"></i>
+      <i id="shortcut" class="icon icon-keyboard" title="快捷键(?)"></i>
+      <i id="about" class="icon icon-info" title="关于(F1)"></i>
+    </div>
+  </footer>
 </body>
 <script src="scripts/main.js"></script>
 

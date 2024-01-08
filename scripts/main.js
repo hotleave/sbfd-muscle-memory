@@ -183,7 +183,12 @@
   }
 
   const shortcut = () => {
-    document.querySelector('#shortcut-content').classList.toggle('visiable')
+    const shown = document.querySelector('.content.visiable')
+    if (shown && shown.id !== 'shortcut-content') {
+      shown.classList.remove('visiable')
+    }
+    const visiable = document.querySelector('#shortcut-content').classList.toggle('visiable')
+    document.querySelector('.card').classList.toggle('visiable', !visiable)
   }
 
   const toggleTheme = (newTheme) => {
@@ -202,11 +207,23 @@
   }
 
   const setup = () => {
-    document.querySelector('#setup-content').classList.toggle('visiable')
+    const shown = document.querySelector('.content.visiable')
+    if (shown && shown.id !== 'setup-content') {
+      shown.classList.remove('visiable')
+    }
+
+    const visiable = document.querySelector('#setup-content').classList.toggle('visiable')
+    document.querySelector('.card').classList.toggle('visiable', !visiable)
   }
 
   const about = () => {
-    document.querySelector('#about-content').classList.toggle('visiable')
+    const shown = document.querySelector('.content.visiable')
+    if (shown && shown.id !== 'about-content') {
+      shown.classList.remove('visiable')
+    }
+
+    const visiable = document.querySelector('#about-content').classList.toggle('visiable')
+    document.querySelector('.card').classList.toggle('visiable', !visiable)
   }
 
   const attachEvent = () => {
@@ -233,6 +250,7 @@
     })
 
     document.addEventListener('keypress', e => {
+      e.preventDefault()
       if (!current) {
         return
       }
@@ -262,6 +280,46 @@
         document.querySelector('.card').setAttribute('style', '--show-hint: inline-block;')
       }
 
+      // 帮助 F1
+      document.querySelector('#about').addEventListener('click', about)
+      // 设置 F2
+      document.querySelector('#setup').addEventListener('click', setup)
+      // 主题 F3
+      document.querySelector('#theme').addEventListener('click', toggleTheme)
+      // 加载进度 F8
+      document.querySelector('#load').addEventListener('click', load)
+      // 重新开始 F9
+      document.querySelector('#restart').addEventListener('click', restart)
+      // 保存 F10
+      document.querySelector('#save').addEventListener('click', save)
+      // 丢弃 Backspace/Delete
+      document.querySelector('#discard').addEventListener('click', discard)
+      // 快捷键 ?
+      document.querySelector('#shortcut').addEventListener('click', shortcut)
+
+      // 提示设置变化
+      document.querySelector('#show-hint').addEventListener('change', e => {
+        const show = settings.showHint = e.target.checked
+        if (show) {
+          document.querySelector('.card').setAttribute('style', '--show-hint: inline-block;')
+        } else {
+          document.querySelector('.card').removeAttribute('style')
+        }
+        localStorage.setItem('settings', JSON.stringify(settings))
+      })
+
+      // 主题设置变化
+      document.querySelector('#setup-content').addEventListener('change', e => {
+        settings.theme = e.target.value
+        localStorage.setItem('settings', JSON.stringify(settings))
+
+        if (settings.theme === 'system') {
+          document.querySelector('html').classList.toggle('light', darkModeQuery.matches)
+        } else {
+          document.querySelector('html').classList.toggle('light', settings.theme === 'light')
+        }
+      })
+
       // register service worker
       navigator.serviceWorker.register('/scripts/service.js')
         .then(reg => {
@@ -271,46 +329,6 @@
     })
     // 离开页面时自动保存
     window.addEventListener('unload', save)
-
-    // 帮助 F1
-    document.querySelector('#about').addEventListener('click', about)
-    // 设置 F2
-    document.querySelector('#setup').addEventListener('click', setup)
-    // 主题 F3
-    document.querySelector('#theme').addEventListener('click', toggleTheme)
-    // 加载进度 F8
-    document.querySelector('#load').addEventListener('click', load)
-    // 重新开始 F9
-    document.querySelector('#restart').addEventListener('click', restart)
-    // 保存 F10
-    document.querySelector('#save').addEventListener('click', save)
-    // 丢弃 Backspace/Delete
-    document.querySelector('#discard').addEventListener('click', discard)
-    // 快捷键 ?
-    document.querySelector('#shortcut').addEventListener('click', shortcut)
-
-    // 提示设置变化
-    document.querySelector('#show-hint').addEventListener('change', e => {
-      const show = settings.showHint = e.target.checked
-      if (show) {
-        document.querySelector('.card').setAttribute('style', '--show-hint: inline-block;')
-      } else {
-        document.querySelector('.card').removeAttribute('style')
-      }
-      localStorage.setItem('settings', JSON.stringify(settings))
-    })
-
-    // 主题设置变化
-    document.querySelector('#theme-group').addEventListener('change', e => {
-      settings.theme = e.target.value
-      localStorage.setItem('settings', JSON.stringify(settings))
-
-      if (settings.theme === 'system') {
-        document.querySelector('html').classList.toggle('light', darkModeQuery.matches)
-      } else {
-        document.querySelector('html').classList.toggle('light', settings.theme === 'light')
-      }
-    })
 
     darkModeQuery.addEventListener('change', (e) => {
       if (settings.theme === 'system') {
