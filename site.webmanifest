@@ -1,0 +1,30 @@
+{
+  "name": "声笔飞单部首肌肉记忆训练",
+  "short_name": "声码部首训练",
+  "description": "帮助你科学有效地记忆声笔飞单部首的按键位置",
+  "categories": [
+    "education",
+    "productivity"
+  ],
+  "version": "1.0.0",
+  "debug": false,
+  "lang": "zh-Hans",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#F0F0F0",
+  "background_color": "#f6f6f6",
+  "form_factor": "wide",
+  "icons": [
+    {
+      "src": "/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
