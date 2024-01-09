@@ -86,13 +86,13 @@ a:hover {
   width: 100%;
   height: 100%;
   font-size: 20rem;
-  color: var(--primary-text);
+  color: var(--brand-color);
   position: relative;
 }
 
 .card .card-back {
   font-size: 3rem;
-  color: var(--brand-color);
+  color: var(--primary-text);
   display: var(--show-hint);
   position: absolute;
   bottom: .5rem;
@@ -100,25 +100,31 @@ a:hover {
 }
 
 .card-front .info {
+  line-height: 1.2rem;
   font-size: 1.2rem;
   color: var(--info-color);
-  height: 100%;
   vertical-align: middle;
 }
 
+.card-front .info::before {
+  content: '按下空格键开始';
+}
+
 .card input {
-  width: 100%;
-  height: 100%;
+  width: 0;
+  height: 0;
   background: transparent;
   position: absolute;
+  right: 0;
+  bottom: 0;
   border: none;
-  caret-color: transparent;
 }
 
 .card input:active,
 .card input:focus {
   border: none;
   outline: none;
+  caret-color: transparent;
 }
 
 #menu {
@@ -160,6 +166,10 @@ a:hover {
   }
   .card .card-front {
     font-size: 14rem;
+  }
+
+  .card-front .info::before {
+    content: '点击屏幕按下空格键开始';
   }
 }
 

@@ -284,6 +284,13 @@
         document.querySelector('#home').style.display = 'none';
       }
 
+      document.querySelector('.card input').addEventListener('composing', e => {
+        e.preventDefault()
+      })
+      document.querySelector('main').addEventListener('click', (e) => {
+        document.querySelector('.card input').focus()
+      })
+
       // 帮助 F1
       document.querySelector('#about').addEventListener('click', about)
       // 设置 F2
