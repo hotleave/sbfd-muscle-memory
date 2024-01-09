@@ -99,10 +99,6 @@ a:hover {
   right: .5rem;
 }
 
-.card .icon {
-  font-size: 24rem;
-}
-
 .card-front .info {
   font-size: 1.2rem;
   color: var(--info-color);
@@ -164,9 +160,6 @@ a:hover {
   }
   .card .card-front {
     font-size: 14rem;
-  }
-  .card .icon {
-    font-size: 16rem;
   }
 }
 
