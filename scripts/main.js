@@ -286,12 +286,8 @@
       document.querySelector('#setup').addEventListener('click', setup)
       // 主题 F3
       document.querySelector('#theme').addEventListener('click', toggleTheme)
-      // 加载进度 F8
-      document.querySelector('#load').addEventListener('click', load)
       // 重新开始 F9
       document.querySelector('#restart').addEventListener('click', restart)
-      // 保存 F10
-      document.querySelector('#save').addEventListener('click', save)
       // 丢弃 Backspace/Delete
       document.querySelector('#discard').addEventListener('click', discard)
       // 快捷键 ?
