@@ -145,7 +145,7 @@ a:hover {
 #menu .icon {
   cursor: pointer;
   font-size: 1.5rem;
-  margin: .5rem;
+  margin: .2rem;
 }
 
 @media (max-width: 767px) {
@@ -157,6 +157,16 @@ a:hover {
     transform: translateX(-50%);
     height: 2.5rem;
     flex-direction: row;
+  }
+  .card {
+    width: 15rem;
+    height: 20rem;
+  }
+  .card .card-front {
+    font-size: 14rem;
+  }
+  .card .icon {
+    font-size: 16rem;
   }
 }
 
