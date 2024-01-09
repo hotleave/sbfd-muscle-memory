@@ -280,6 +280,10 @@
         document.querySelector('.card').setAttribute('style', '--show-hint: inline-block;')
       }
 
+      if (location.pathname === '/') {
+        document.querySelector('#home').style.display = 'none';
+      }
+
       // 帮助 F1
       document.querySelector('#about').addEventListener('click', about)
       // 设置 F2

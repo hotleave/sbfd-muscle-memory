@@ -202,6 +202,14 @@ a:hover {
   border: 1px dashed var(--base-border);
 }
 
+#home svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  stroke: var(--secondary-text);
+  fill: none;
+  stroke-width: 2.6rem;
+}
+
 @font-face {
   font-family: 'fontello';
   src: url('../font/fontello.eot?99696836');
