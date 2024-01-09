@@ -305,3 +305,8 @@ a:hover {
 .icon-hourglass-2:before {
   content: '\e810';
 }
+
+.content h2 {
+  text-align: center;
+  margin-bottom: 10%;
+}
