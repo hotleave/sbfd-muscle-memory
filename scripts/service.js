@@ -20,7 +20,7 @@ const LOCAL_URLS = [
 ]
 const REMOTE_URLS = [
 ]
-const VERSION = "1.0.2"
+const VERSION = "1.0.3"
 
 self.addEventListener("install", (event) => {
   console.log('Installing...')
