@@ -162,8 +162,11 @@
       return
     }
 
-    sm.discard(current)
-    _next()
+    const remove = confirm(`确认要删除 "${current.value.front}(${current.value.back})" 吗？`)
+    if (remove) {
+      sm.discard(current)
+      _next()
+    }
   }
 
   const shortcut = () => {
@@ -212,7 +215,7 @@
 
   const _updateRemained = () => {
     const now = Date.now()
-    const remained = sm.q.filter(v => v.dueDate.getTime() <= now).length - 1
+    const remained = sm.q.filter(v => v.dueDate.getTime() <= now).length
     document.querySelector('.card-number').innerText = remained
   }
 
