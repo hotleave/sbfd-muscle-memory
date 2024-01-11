@@ -85,6 +85,8 @@
       document.querySelector('.card-back').innerHTML = back
       startTime = performance.now()
       fail = 0
+
+      _updateRemained()
     } else if (sm.q.length > 0) {
       save()
       alert('今日训练任务已完成，明日再来')
@@ -206,6 +208,12 @@
 
     const visiable = document.querySelector('#about-content').classList.toggle('visiable')
     document.querySelector('.card').classList.toggle('visiable', !visiable)
+  }
+
+  const _updateRemained = () => {
+    const now = Date.now()
+    const remained = sm.q.filter(v => v.dueDate.getTime() <= now).length - 1
+    document.querySelector('.card-number').innerText = remained
   }
 
   const attachEvent = () => {

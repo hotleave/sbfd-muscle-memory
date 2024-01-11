@@ -99,6 +99,14 @@ a:hover {
   right: .5rem;
 }
 
+.card .card-number {
+  font-size: 1rem;
+  color: var(--secondary-text);
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+}
+
 .card-front .info {
   line-height: 1.2rem;
   font-size: 1.2rem;
