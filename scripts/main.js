@@ -10,7 +10,7 @@
   let sm = null
   let current = null
   let startTime = 0
-  let fail = false
+  let fail = 0
 
   const data = {
     'q': '气欠犬犭青其日曰攴',
@@ -84,6 +84,7 @@
       document.querySelector('.card-front').innerHTML = front === '告' ? '<span class="icon">&#xe800;</span>' : front
       document.querySelector('.card-back').innerHTML = back
       startTime = performance.now()
+      fail = 0
     } else if (sm.q.length > 0) {
       save()
       alert('今日训练任务已完成，明日再来')
@@ -91,42 +92,23 @@
   }
 
   const _grade = () => {
-    if (fail) {
-      fail = false
-      return 0
+    if (fail > 0) {
+      return Math.max(0, 3 - fail)
     }
 
-    const elapsed = performance.now - startTime
-    if (elapsed < 200) {
+    const elapsed = performance.now() - startTime
+    if (elapsed < 600) {
       // very good
       return 5
     }
 
-    if (elapsed < 300) {
+    if (elapsed < 1000) {
       // good
       return 4
     }
 
-    if (elapsed < 500) {
-      // normal
-      return 3
-    }
-
-    if (elapsed < 1000) {
-      // need improve
-      return 2
-    }
-
-    // bad
-    return 1
-  }
-
-  const _tomorrow = () => {
-    let result = new Date()
-    result.setHours(0, 0, 0, 0)
-    result.setTime(result.getTime() + 86400000)
-
-    return result
+    // normal
+    return 3
   }
 
   const load = () => {
@@ -147,7 +129,7 @@
   }
 
   const answer = (grade, item) => {
-    sm.answer(grade, item, _tomorrow())
+    sm.answer(grade, item)
   }
 
   /**
@@ -263,9 +245,9 @@
         answer(_grade(), current)
         _next()
       } else {
-        fail = true
+        fail++
 
-        if (!settings.showHint) {
+        if (!settings.showHint && fail >= 3) {
           document.querySelector('.card').setAttribute('style', '--show-hint: inline-block;')
         }
       }
