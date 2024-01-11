@@ -299,6 +299,10 @@
 
       // 主题设置变化
       document.querySelector('#setup-content').addEventListener('change', e => {
+        if (e.target.name !== 'theme-mode') {
+          return
+        }
+
         settings.theme = e.target.value
         localStorage.setItem('settings', JSON.stringify(settings))
 
