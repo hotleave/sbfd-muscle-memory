@@ -89,7 +89,7 @@
       _updateRemained()
     } else if (sm.q.length > 0) {
       save()
-      alert('今日训练任务已完成，明日再来')
+      alert(`今日训练任务已完成，下一张卡牌的训练时间是：${sm.q[0].dueDate.toLocaleString()}`)
     }
   }
 
