@@ -236,7 +236,7 @@
 
     // 按键事件
     document.addEventListener('keyup', e => {
-      const callback = e.key === ' ' ? _next : handlers[e.key]
+      const callback = handlers[e.key]
       if (callback) {
         callback.apply(e)
       }
@@ -267,6 +267,7 @@
     // 页面加载时自动读取进度
     window.addEventListener('load', e => {
       load()
+      _next()
 
       document.querySelector('#show-hint').checked = settings.showHint
       if (settings.showHint) {

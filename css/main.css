@@ -107,17 +107,6 @@ a:hover {
   right: .5rem;
 }
 
-.card-front .info {
-  line-height: 1.2rem;
-  font-size: 1.2rem;
-  color: var(--info-color);
-  vertical-align: middle;
-}
-
-.card-front .info::before {
-  content: '按下空格键开始';
-}
-
 .card input {
   width: 0;
   height: 0;
@@ -174,10 +163,6 @@ a:hover {
   }
   .card .card-front {
     font-size: 14rem;
-  }
-
-  .card-front .info::before {
-    content: '点击屏幕按下空格键开始';
   }
 }
 
