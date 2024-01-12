@@ -246,6 +246,9 @@
       'Delete': discard,
       'Escape': (e) => { 
         e.preventDefault()
+        if (input.length > 0) {
+          fail++
+        }
         _updateInput('')
       },
       'Del': discard,
