@@ -81,13 +81,20 @@ a:hover {
 .card.visiable {
   display: flex;
 }
+.card.double {
+  width: 42rem;
+}
 
 .card .card-front {
   width: 100%;
   height: 100%;
   font-size: 20rem;
-  color: var(--brand-color);
+  color: var(--secondary-text);
   position: relative;
+}
+.card.part .card-front {
+  color: var(--primary-text);
+  color: var(--brand-color);
 }
 
 .card .card-back {
@@ -100,11 +107,17 @@ a:hover {
 }
 
 .card .card-number {
-  font-size: 1rem;
   color: var(--secondary-text);
   position: absolute;
   top: .5rem;
   right: .5rem;
+}
+
+.card .answer {
+  position: absolute;
+  left: .5rem;
+  bottom: .5rem;
+  color: var(--secondary-text);
 }
 
 .card input {
@@ -161,8 +174,15 @@ a:hover {
     width: 15rem;
     height: 20rem;
   }
+  .card.double {
+    width: 15rem;
+  }
   .card .card-front {
     font-size: 14rem;
+  }
+  .card.double .card-front {
+    font-size: 7rem;
+    line-height: 19rem;
   }
 }
 

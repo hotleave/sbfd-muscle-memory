@@ -1,5 +1,5 @@
 ﻿(function () {
-  const settings = { theme: 'system', showHint: false }
+  const settings = { theme: 'system', showHint: false, content: ['part'] }
   let settingData = localStorage.getItem('settings')
   if (settingData) {
     Object.assign(settings, JSON.parse(settingData))
@@ -11,30 +11,18 @@
   let current = null
   let startTime = 0
   let fail = 0
+  let input = ''
 
-  const data = {
-    'q': '气欠犬犭青其日曰攴',
-    'w': '韦文瓦王攵夂夊亠韋',
-    'r': '人亻',
-    't': '田土士',
-    'y': '又用业页頁衣羊言讠音酉尢疋',
-    'p': '片皮⺮丿彡',
-    's': '十山尸手水石矢舌身鼠示食饣飠殳豕丨厶',
-    'd': '刀大歹斗鬥豆丶冫氵癶',
-    'f': '方风風父缶扌',
-    'g': '工弓广戈瓜革鬼骨艮宀冖',
-    'h': '一户火禾黑虍',
-    'j': '几己巾斤见見臼角金钅釒纟糹',
-    'k': '口囗匚凵冂',
-    'l': '力立龙龍里鹿耒刂忄廴辶灬卤鹵',
-    'z': '乙子舟自走豸隹足⻊爪爫丬爿罒長巛',
-    'x': '夕小心穴血覀辛彐糸⺍⺌',
-    'c': '厂寸车車虫赤辰齿齒彳艹卝屮',
-    'v': '二儿耳月羽鱼魚雨聿阝卩',
-    'b': '八比贝貝白鼻卜髟勹疒丷',
-    // 告 只取上半部分，即牛字头
-    'n': '女牛告鸟鳥衤礻廾止',
-    'm': '马馬门門毛木皿目麻米麦麥母毋毌',
+  const getData = async (url) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Error when loading data');
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Fetch error when loading data', error);
+    }
   }
 
   const shuffle = (array) => {
@@ -54,22 +42,39 @@
     return array;
   }
 
-  const _makeCards = () => {
+  const _makeCards = async () => {
+    const promises = settings.content.map(type => getData(`../data/${type}.json`))
+    const datas = await Promise.all(promises)
+
     const cards = []
-    for (const key of Object.keys(data)) {
-      const back = key
-      const parts = data[key]
-      for (let i = parts.length - 1; i >= 0; i--) {
-        let front = parts.charAt(i)
-        cards.push({ front, back })
+    datas.forEach(data => {
+      const part = data['_type'] === 'part'
+      if (part) {
+        delete data['_type']
       }
-    }
+
+      for (const key of Object.keys(data)) {
+        const back = key
+        if (part) {
+          const parts = data[key]
+          for (let i = parts.length - 1; i >= 0; i--) {
+            let front = parts.charAt(i)
+            cards.push({ front, back, part })
+          }
+        } else {
+          const front = data[key]
+          cards.push({ front, back, part })
+        }
+      }
+    })
     shuffle(cards)
 
     sm = new SM()
     for (const card of cards) {
       sm.addItem(card)
     }
+
+    _next()
   }
 
   const _next = () => {
@@ -81,10 +86,14 @@
     if (current) {
       const { front, back } = current.value
 
+      const classList = document.querySelector('.card').classList
+      classList.toggle('double', front.length === 2)
+      classList.toggle('part', current.value.part)
       document.querySelector('.card-front').innerHTML = front === '告' ? '<span class="icon">&#xe800;</span>' : front
       document.querySelector('.card-back').innerHTML = back
       startTime = performance.now()
       fail = 0
+      _updateInput('')
 
       _updateRemained()
     } else if (sm.q.length > 0) {
@@ -128,6 +137,8 @@
       document.querySelector('.card-front').innerHTML = ''
       document.querySelector('.card-back').innerHTML = ''
     }
+
+    _next()
   }
 
   const answer = (grade, item) => {
@@ -139,7 +150,6 @@
    */
   const restart = () => {
     _makeCards()
-    _next()
   }
 
   /**
@@ -219,6 +229,11 @@
     document.querySelector('.card-number').innerText = remained
   }
 
+  const _updateInput  = (value) => {
+    input = value
+    document.querySelector('.answer').innerText = input
+  }
+
   const attachEvent = () => {
     const handlers = {
       'F1': about,
@@ -229,7 +244,10 @@
       'F10': save,
       'Backspace': discard,
       'Delete': discard,
-      'Escape': discard,
+      'Escape': (e) => { 
+        e.preventDefault()
+        _updateInput('')
+      },
       'Del': discard,
       '?': shortcut
     }
@@ -238,7 +256,7 @@
     document.addEventListener('keyup', e => {
       const callback = handlers[e.key]
       if (callback) {
-        callback.apply(e)
+        callback.call(this, e)
       }
     })
 
@@ -248,7 +266,18 @@
         return
       }
 
-      if (current.value.back === e.key.toLowerCase()) {
+      const expect = current.value.back
+      let correct = false
+      if (e.key.length === 1) {
+        _updateInput(input + e.key.toLowerCase())
+      }
+      if (input.length >= expect.length) {
+        correct = input === expect
+      } else {
+        return
+      }
+
+      if (correct) {
         // input is correct
         if (!settings.showHint) {
           document.querySelector('.card').removeAttribute('style')
@@ -257,6 +286,11 @@
         _next()
       } else {
         fail++
+
+        if (expect.length === 1) {
+          // 如果只有一个按键，则自动重置
+          _updateInput('')
+        }
 
         if (!settings.showHint && fail >= 3) {
           document.querySelector('.card').setAttribute('style', '--show-hint: inline-block;')
@@ -267,7 +301,6 @@
     // 页面加载时自动读取进度
     window.addEventListener('load', e => {
       load()
-      _next()
 
       document.querySelector('#show-hint').checked = settings.showHint
       if (settings.showHint) {
@@ -311,17 +344,31 @@
 
       // 主题设置变化
       document.querySelector('#setup-content').addEventListener('change', e => {
-        if (e.target.name !== 'theme-mode') {
+        if (e.target.id === 'show-hint') {
           return
         }
 
-        settings.theme = e.target.value
-        localStorage.setItem('settings', JSON.stringify(settings))
+        if (e.target.name === 'theme-mode') {
+          settings.theme = e.target.value
+          localStorage.setItem('settings', JSON.stringify(settings))
 
-        if (settings.theme === 'system') {
-          document.querySelector('html').classList.toggle('light', darkModeQuery.matches)
-        } else {
-          document.querySelector('html').classList.toggle('light', settings.theme === 'light')
+          if (settings.theme === 'system') {
+            document.querySelector('html').classList.toggle('light', darkModeQuery.matches)
+          } else {
+            document.querySelector('html').classList.toggle('light', settings.theme === 'light')
+          }
+        }
+
+        if (e.target.name === 'content') {
+          const content = []
+          document.querySelectorAll('input[name=content]:checked').forEach(v => content.push(v.value))
+          if (content.length === 0) {
+            e.target.checked = true
+            return
+          }
+
+          settings.content = content
+          localStorage.setItem('settings', JSON.stringify(settings))
         }
       })
 
@@ -343,6 +390,9 @@
   }
 
   toggleTheme(settings.theme === 'system' ? (darkModeQuery.matches ? 'light' : 'dark') : settings.theme)
+  settings.content.forEach(v => {
+    document.querySelector(`input[value=${v}]`).checked = true
+  })
 
   attachEvent()
 })()
